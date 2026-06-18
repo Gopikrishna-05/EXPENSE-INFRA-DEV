@@ -1,0 +1,16 @@
+data "aws_ami" "joindevops" {
+  most_recent = true
+
+  filter {
+    name   = "image-id"
+    values = ["ami-0220d79f3f480ecf5"]
+  }
+}
+
+data "aws_ssm_parameter" "bastion_sg_id" {
+  name = "/${var.project_name}/${var.environment}/bastion_sg_id"
+}
+
+data "aws_ssm_parameter" "public_subnet_ids" {
+  name = "/${var.project_name}/${var.environment}/public_subnet_ids"
+}
