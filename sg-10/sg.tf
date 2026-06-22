@@ -57,3 +57,13 @@ resource "aws_security_group_rule" "app_alb_bastion" {
   source_security_group_id       = module.bastion_sg.sg_id
   security_group_id = module.app_alb_sg.sg_id
 }
+
+# JDOPS-32, Bastion host should be accessed from office n/w
+resource "aws_security_group_rule" "bastion_public" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.bastion_sg.sg_id
+}
