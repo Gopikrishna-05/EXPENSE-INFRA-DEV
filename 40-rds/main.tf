@@ -30,6 +30,7 @@ module "db" {
 
   # Database Deletion Protection
   deletion_protection = false
+  skip_final_snapshot = true
 
   parameters = [
     {
@@ -65,4 +66,12 @@ module "db" {
         Name = local.resource_name
     }
   )
+}
+
+resource "aws_route53_record" "www-dev" {
+  zone_id = var.zone_id
+  name    = "mysql-${var.environment}.${var.domain_name}"
+  type    = "CNAME"
+  ttl     = 5
+  records = [module.db.db_instance_address]
 }
