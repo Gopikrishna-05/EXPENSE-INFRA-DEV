@@ -19,5 +19,5 @@ variable "zone_id" {
 }
 
 variable "domain_name" {
-    default = "gopikrishna-devops.online "
+    default = "gopikrishna-devops.online"
 }
